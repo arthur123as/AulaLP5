@@ -4,7 +4,12 @@
  */
 package tools;
 
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -18,10 +23,36 @@ public class Util {
         }
     }
     
-    public static void limpar(JComponent ... componentes) {
+    public static void limpar(JComponent... componentes) {
         for (int i = 0; i < componentes.length; i++) {
-            
-            ((JTextField) componentes[i]).setText("");
+            if (componentes[i] instanceof JTextField) {
+                ((JTextField) componentes[i]).setText("");
+            }
+
+            if (componentes[i] instanceof JComboBox) {
+                ((JComboBox<?>) componentes[i]).setSelectedIndex(-1);
+            }
+
+            if (componentes[i] instanceof JCheckBox) {
+                ((JCheckBox) componentes[i]).setSelected(false);
+            }
+
+            if (componentes[i] instanceof JFormattedTextField) {
+                ((JFormattedTextField) componentes[i]).setText("");
+            }
+
+            if (componentes[i] instanceof JPasswordField) {
+                ((JPasswordField) componentes[i]).setText("");
+            }
         }
+    }
+    
+    public static void mensagem(String cad) {
+        JOptionPane.showMessageDialog(null, cad);
+    }
+
+    public static boolean perguntar(String cad){
+        JOptionPane.showConfirmDialog(null, cad);
+        return true;
     }
 }
